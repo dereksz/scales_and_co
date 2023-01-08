@@ -3,6 +3,8 @@
   --natural-key-height: 200px;
   --sharp-key-width: 30px;
   --sharp-key-height: 100px;
+  --two-sharp-offsets: 2px;
+  --three-sharp-offsets: 4px;
 }
 
 #piano-keyboard {
@@ -11,24 +13,44 @@
   justify-content: flex-start;
 }
 
-.key-natural {
+.key {
   position: relative;
-  width: var(--natural-key-width);
-  height: var(--natural-key-height);
   border: 1px solid black;
   box-sizing: border-box;
+  border-radius: 0 0 5px 5px;
+
+}
+
+.key-natural {
+  width: var(--natural-key-width);
+  height: var(--natural-key-height);
   background: #fffff0;
 }
 
 .key-sharp {
-  position: relative;
   width: var(--sharp-key-width);
   height: var(--sharp-key-height);
   background: #36454f;
-  box-sizing: border-box;
   z-index: 1;
   transform: translateX(-50%);
 }
+
+.key-C♯ {
+  transform: translateX(calc(-50% - var(--two-sharp-offsets)));
+}
+
+.key-E♭ {
+  transform: translateX(calc(-50% + var(--two-sharp-offsets)));
+}
+
+.key-F♯ {
+  transform: translateX(calc(-50% - var(--three-sharp-offsets)));
+}
+
+.key-B♭ {
+  transform: translateX(calc(-50% + var(--three-sharp-offsets)));
+}
+
 
 .key-sharp + .key-natural {
   margin-left: calc(-1 * var(--sharp-key-width));
