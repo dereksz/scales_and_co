@@ -1,0 +1,9 @@
+@font-face {
+  font-family: "MusiQwik";
+  src: url(./build-asserts/MusiQwik.woff2) format("woff2");
+}
+
+.music {
+  font-family: 'MusiQwik';
+  font-size: 44pt;
+}
