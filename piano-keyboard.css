@@ -7,6 +7,11 @@
   --three-sharp-offsets: 4px;
 }
 
+body {
+  margin: 10px;
+  background-color: var(--bs-gray-600);
+}
+
 #piano-keyboard {
   position: relative;
   display: flex;
@@ -24,7 +29,7 @@
 .key-natural {
   width: var(--natural-key-width);
   height: var(--natural-key-height);
-  background: #fffff0;
+  background: #fffff0; /* Ivory */
 }
 
 .key-sharp {
