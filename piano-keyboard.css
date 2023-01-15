@@ -15,7 +15,7 @@ body {
 #piano-keyboard {
   position: relative;
   display: flex;
-  justify-content: flex-start;
+  text-align: center;
 }
 
 .key {
@@ -23,13 +23,14 @@ body {
   border: 1px solid black;
   box-sizing: border-box;
   border-radius: 0 0 5px 5px;
-
 }
 
 .key-natural {
   width: var(--natural-key-width);
   height: var(--natural-key-height);
   background: #fffff0; /* Ivory */
+  color: black;
+  padding-top: 170px;
 }
 
 .key-sharp {
@@ -37,6 +38,7 @@ body {
   height: var(--sharp-key-height);
   background: #36454f;
   z-index: 1;
+  padding-top: 70px;
   transform: translateX(-50%);
 }
 
@@ -61,8 +63,7 @@ body {
   margin-left: calc(-1 * var(--sharp-key-width));
 }
 
-.key-natural.active::after,
-.key-sharp.active::after {
+.key.active::after {
   content: "";
   width: 15px;
   height: 15px;

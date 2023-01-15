@@ -68,36 +68,56 @@
 
         
         <div id="piano-keyboard">
-          <div class="key key-natural"></div>
-          <div class="key key-sharp key-C♯"></div>
-          <div class="key key-natural"></div>
-          <div class="key key-sharp key-E♭"></div>
-          <div class="key key-natural"></div>
-          <div class="key key-natural"></div>
-          <div class="key key-sharp key-F♯"></div>
-          <div class="key key-natural"></div>
-          <div class="key key-sharp"></div>
-          <div class="key key-natural"></div>
-          <div class="key key-sharp key-B♭"></div>
-          <div class="key key-natural"></div>
 
-          <div class="key key-natural"></div>
-          <div class="key key-sharp key-C♯"></div>
-          <div class="key key-natural"></div>
-          <div class="key key-sharp key-E♭"></div>
-          <div class="key key-natural"></div>
-          <div class="key key-natural"></div>
-          <div class="key key-sharp key-F♯"></div>
-          <div class="key key-natural"></div>
-          <div class="key key-sharp"></div>
-          <div class="key key-natural"></div>
-          <div class="key key-sharp key-B♭"></div>
-          <div class="key key-natural"></div>
+          <span class="key key-natural" id="C4"><span class="key-text">C</span></span>
+          <span class="key key-sharp key-C♯" id="C♯4">C♯<sub>4</sub></span>
+          <span class="key key-natural" id="D4">D</span>
+          <span class="key key-sharp key-E♭" id="E♭4">E♭</span>
+          <span class="key key-natural" id="E4">E</span>
+          <span class="key key-natural" id="F4">F</span>
+          <span class="key key-sharp key-F♯" id="F♯4">F♯</span>
+          <span class="key key-natural" id="G4">G</span>
+          <span class="key key-sharp" id="G♯4">G♯</span>
+          <span class="key key-natural" id="A4">A</span>
+          <span class="key key-sharp key-B♭" id="B♭4">B♭</span>
+          <span class="key key-natural" id="B4">B</span>
 
-          <div class="key key-natural"></div>
+          <span class="key key-natural" id="C5">C</span>
+          <span class="key key-sharp key-C♯" id="C♯5">C♯</span>
+          <span class="key key-natural" id="D5">D</span>
+          <span class="key key-sharp key-E♭" id="E♭5">E♭</span>
+          <span class="key key-natural" id="E5">E</span>
+          <span class="key key-natural" id="F5">F</span>
+          <span class="key key-sharp key-F♯" id="F♯5">F♯</span>
+          <span class="key key-natural" id="G5">G</span>
+          <span class="key key-sharp" id="G♯5">G♯</span>
+          <span class="key key-natural" id="A5">A</span>
+          <span class="key key-sharp key-B♭" id="B♭5">B♭</span>
+          <span class="key key-natural" id="B5">B</span>
+
+          <span class="key key-natural" id="C6">C</span>
+
         </div>
       </div>
 
+      <br />
+      <script>
+        function add_dots(key_spec) {
+          keys = key_spec.split(" ")
+          for (i in keys) {
+            key = keys[i]
+            console.trace(key)
+            console.trace("\n")
+            elm = document.getElementById(key);
+            // color = "red"
+            // if (elm.classList.contains("key-sharp")) {
+            //   color = "yellow"
+            // }
+            elm.style.color = color
+          }
+        }
+      </script>
+      <button id="add-dots" onclick="add_dots('C♯4 D5 E5')" >Add Dots</button>
     </main>
   </body>
 </html>
