@@ -18,9 +18,6 @@
     -->
   </head>
   <body class="d-flex flex-column h-100 min-vh-100">
-    <script type = "text/javascript">  
-      window.onload = abcNotesConvert
-    </script>
     <main class="bg-secondary text-white flex-grow-1">
         <h1>Piano chord visualizer</h1>
 
@@ -69,39 +66,66 @@
         
         <div id="piano-keyboard">
 
-          <span class="key key-natural" id="C4"><span class="key-text">C</span></span>
-          <span class="key key-sharp key-C♯" id="C♯4">C♯<sub>4</sub></span>
-          <span class="key key-natural" id="D4">D</span>
-          <span class="key key-sharp key-E♭" id="E♭4">E♭</span>
-          <span class="key key-natural" id="E4">E</span>
-          <span class="key key-natural" id="F4">F</span>
-          <span class="key key-sharp key-F♯" id="F♯4">F♯</span>
-          <span class="key key-natural" id="G4">G</span>
-          <span class="key key-sharp" id="G♯4">G♯</span>
-          <span class="key key-natural" id="A4">A</span>
-          <span class="key key-sharp key-B♭" id="B♭4">B♭</span>
-          <span class="key key-natural" id="B4">B</span>
-
-          <span class="key key-natural" id="C5">C</span>
-          <span class="key key-sharp key-C♯" id="C♯5">C♯</span>
-          <span class="key key-natural" id="D5">D</span>
-          <span class="key key-sharp key-E♭" id="E♭5">E♭</span>
-          <span class="key key-natural" id="E5">E</span>
-          <span class="key key-natural" id="F5">F</span>
-          <span class="key key-sharp key-F♯" id="F♯5">F♯</span>
-          <span class="key key-natural" id="G5">G</span>
-          <span class="key key-sharp" id="G♯5">G♯</span>
-          <span class="key key-natural" id="A5">A</span>
-          <span class="key key-sharp key-B♭" id="B♭5">B♭</span>
-          <span class="key key-natural" id="B5">B</span>
-
-          <span class="key key-natural" id="C6">C</span>
+       
 
         </div>
+        <script type = "text/javascript">  
+          function buildKeyBoard() {
+            outer = document.getElementById("piano-keyboard")
+            var octaves = [3,4,5]
+            var keys = "C C♯ D E♭ E F F♯ G G♯ A B♭ B".split(" ")
+            for (o in octaves) {
+              o = octaves[o]
+              for (k in keys) {
+                k = keys[k]
+                ov = document.createElement("sub");
+                ov.innerHTML = o
+                s = document.createElement("span");
+                s.id = k + o
+                s.classList.add("key")
+                if (k.length == 1) {
+                  s.classList.add("key-natural")
+                } else {
+                  s.classList.add("key-sharp")
+                }
+                s.classList.add("key-" + k)
+                inner = 
+                s.appendChild(document.createTextNode(k))
+                s.appendChild(ov)
+                outer.appendChild(s)
+                if (s.innerText == "C5") {
+                  break
+                }
+              }
+            }
+
+          }
+          function setup() {
+            abcNotesConvert()
+            buildKeyBoard()
+          }
+        </script>
+        <script type = "text/javascript">  
+          window.onload = setup
+        </script>
+    
+
       </div>
 
       <br />
       <script>
+        function reset() {
+          elmts = document.getElementsByClassName("key-natural")
+          for (i in elmts) {
+            e = elmts[i]
+            e.style.color = "black"
+          }
+          elmts = document.getElementsByClassName("key-sharp")
+          for (i in elmts) {
+            e = elmts[i]
+            e.style.color = "white"
+          }
+        }
         function add_dots(key_spec) {
           keys = key_spec.split(" ")
           for (i in keys) {
@@ -109,7 +133,7 @@
             console.trace(key)
             console.trace("\n")
             elm = document.getElementById(key);
-            // color = "red"
+            color = "red"
             // if (elm.classList.contains("key-sharp")) {
             //   color = "yellow"
             // }
@@ -117,7 +141,9 @@
           }
         }
       </script>
-      <button id="add-dots" onclick="add_dots('C♯4 D5 E5')" >Add Dots</button>
+        <button id="add-dots" onclick='add_dots(document.getElementById("keys-to-color").value)'>Add Dots</button>
+        <input id="keys-to-color" value="C3 E3 G3"></input>
+        <button id="reset" onclick="reset()">Reset</button>
     </main>
   </body>
 </html>
