@@ -31,6 +31,7 @@ function setViewBox(selector) {
 function abcNotesConvert() {
   document.querySelectorAll('.abc-notes').forEach(block=>{
     abcNotes(block.textContent, block.id)
-    setViewBox(block.id)
+    // setViewBox(block.id)
   })
 }
+
