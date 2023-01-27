@@ -23,14 +23,52 @@ body {
   border: 1px solid black;
   box-sizing: border-box;
   border-radius: 0 0 5px 5px;
+  display: block;
+  transition: background-color 0.25s;
 }
+
+.key-contents {
+  position: absolute;
+  width: 100%;
+  bottom: 5px;
+}
+
+.key-pad {
+  position: relative;
+  width: 60%;
+  margin-left: 20%;
+  border-radius: 35%;
+  color: white;
+  background: transparent;
+  font-family: serif;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.key-sharp .key-contents .key-pad {
+  width: 90%;
+  margin-left: 5%;
+  border-radius: 35%;
+}
+
+/* .key:hover {
+  content: "";
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: red;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+} */
 
 .key-natural {
   width: var(--natural-key-width);
   height: var(--natural-key-height);
   background: #fffff0; /* Ivory */
   color: black;
-  padding-top: 170px;
+  /* padding-top: 145px; */
 }
 
 .key-sharp {
@@ -38,9 +76,18 @@ body {
   height: var(--sharp-key-height);
   background: #36454f;
   z-index: 1;
-  padding-top: 70px;
+  /* padding-top: 45px; */
   transform: translateX(-50%);
 }
+
+.key-natural:hover {
+  background-color: rgb(89, 190, 89);
+}
+
+.key-sharp:hover {
+  background-color: green;
+}
+
 
 .key-C♯ {
   transform: translateX(calc(-50% - var(--two-sharp-offsets)));
@@ -59,18 +106,18 @@ body {
 }
 
 
-.key-sharp + .key-natural {
+.key-sharp + .key-natural { /* Shift left the white key over the black */
   margin-left: calc(-1 * var(--sharp-key-width));
 }
 
-.key.active::after {
+/* .key.active::after {
   content: "";
   width: 15px;
   height: 15px;
-  border-radius: 50%;
+  border-radius: 50%;F
   background-color: red;
   position: absolute;
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
-}
+} */
