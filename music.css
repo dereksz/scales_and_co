@@ -3,10 +3,21 @@
   src: url(./assets/MusiQwik.woff2) format("woff2");
 }
 
+@font-face {
+  font-family: "Sax";
+  src: url(./assets/LegniSaxophone.woff2) format("woff2");
+}
+
 .music {
   font-family: 'MusiQwik';
   font-size: 28pt;
 }
+
+.sax {
+  font-family: 'Sax';
+  font-size: 36pt;
+}
+
 /* 
 .abc-notes svg {
   width: 40px;
