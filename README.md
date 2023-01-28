@@ -1,6 +1,10 @@
 # Welcome
 
+## Intention
 
+The intention here is to create a highly authentic and configurable HTML / CSS 
+piano keyboard, that can have text and markings added, and can then be used as
+a platform for creating tools that teach music theory.
 
 
 # Acknowledgements / Sub-Licenses

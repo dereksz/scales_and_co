@@ -3,20 +3,21 @@
 
 all: assets licenses/abcjs_plugin.LICENSE
 
-assets: fonts assets/abcjs-plugin-min.js
+assets: fonts js/abcjs-plugin-min.js
 
-fonts: assets/MusiQwik.woff2 assets/LegniSaxophone.woff2
+fonts: fonts/MusiQwik.woff2 fonts/LegniSaxophone.woff2
 
-assets/%.woff2: build-assets/%.ttf
+# Never got this to work - loaded and exported by hand via FontForge
+fonts/%.woff2: sources/fonts/%.ttf
 	fontforge -c "open('$<'); generate('$@')"
 
-assets/abcjs-plugin-min.js :
+js/abcjs-plugin-min.js :
 	curl -O "$@" https://paulrosen.github.io/abcjs/dist/$(@F)
 
-build-assets/MusiQwik.ttf:
+source-assets/MusiQwik.ttf:
 	curl -O "$@" http://luc.devroye.org/allgeyer/$(@F)
 
-build-assets/LegniSaxophone.ttf:
+source-assets/LegniSaxophone.ttf:
 
 licenses/abcjs_plugin.LICENSE :
 	curl -O "$@" https://paulrosen.github.io/abcjs/dist/$(@F)
