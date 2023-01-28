@@ -43,6 +43,7 @@ class Note {
 
 classic_scale = "TTsTTTs" // Tone Tone semi-tone, ...
 // We'll try to code for the equivalent WWhWWWh (Whole / half) variant too; we'll make case insensitive
+relative_minor_scale = "TsTTsTT" // Staring on the vi of the relative major scale
 
 left_rotations = [
   "Ionian", // White notes starting on C
@@ -50,7 +51,7 @@ left_rotations = [
   "Phrygian", // …starting on E
   "Lydian", // …starting on F
   "Mixolydian", // …starting on G
-  "Aeolian", // …starting on A  
+  "Aeolian", // …starting on A == relative minor
   "Locrian", // Starting on B 
   /* "The Locrian mode is traditionally considered theoretical rather than practical 
      because the triad built on the first scale degree is diminished"
