@@ -20,126 +20,70 @@
   </head>
   <body class="d-flex flex-column h-100 min-vh-100">
     <main class="bg-secondary text-white flex-grow-1">
-        <h1>Piano chord visualizer</h1>
+      <h1>Piano chord visualizer</h1>
 
-        <label for="root-notes-group" class="form-label"><i class="bi bi-music-note"></i> Root note</label>
-        <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
-          <div id="root-notes-group" class="btn-group me-2" role="group" aria-label="Root notes group">
-            <button type="button" class="btn btn-outline-light">C<div class="abc-notes" id="C">C</div></button>
-            <button type="button" class="btn btn-outline-light">C♯<div class="abc-notes" id="C♯">^C</div></button>
-            <button type="button" class="btn btn-outline-light">D<div class="abc-notes" id="D">D</div></button>
-            <button type="button" class="btn btn-outline-light">E♭<div class="abc-notes" id="E♭">_E</div></button>
-            <button type="button" class="btn btn-outline-light">E<div class="abc-notes" id="E">E</div></button>
-            <button type="button" class="btn btn-outline-light">F<div class="abc-notes" id="F">F</div></button>
-            <button type="button" class="btn btn-outline-light">F♯<div class="abc-notes" id="F♯">^F</div></button>
-            <button type="button" class="btn btn-outline-light">G<div class="abc-notes" id="G">G</div></button>
-            <button type="button" class="btn btn-outline-light">A♭<div class="abc-notes" id="A♭">_A</div></button>
-            <button type="button" class="btn btn-outline-light">A<div class="abc-notes" id="A">A</div></button>
-            <button type="button" class="btn btn-outline-light">B♭<div class="abc-notes" id="B♭">_B</div></button>
-            <button type="button" class="btn btn-outline-light">B<div class="abc-notes" id="B">B</div></button>
+      <label for="root-notes-group" class="form-label"><i class="bi bi-music-note"></i> Root note</label>
+      <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
+        <div id="root-notes-group" class="btn-group me-2" role="group" aria-label="Root notes group">
+          <button type="button" class="btn btn-outline-light">C<div class="abc-notes" id="C">C</div></button>
+          <button type="button" class="btn btn-outline-light">C♯<div class="abc-notes" id="C♯">^C</div></button>
+          <button type="button" class="btn btn-outline-light">D<div class="abc-notes" id="D">D</div></button>
+          <button type="button" class="btn btn-outline-light">E♭<div class="abc-notes" id="E♭">_E</div></button>
+          <button type="button" class="btn btn-outline-light">E<div class="abc-notes" id="E">E</div></button>
+          <button type="button" class="btn btn-outline-light">F<div class="abc-notes" id="F">F</div></button>
+          <button type="button" class="btn btn-outline-light">F♯<div class="abc-notes" id="F♯">^F</div></button>
+          <button type="button" class="btn btn-outline-light">G<div class="abc-notes" id="G">G</div></button>
+          <button type="button" class="btn btn-outline-light">A♭<div class="abc-notes" id="A♭">_A</div></button>
+          <button type="button" class="btn btn-outline-light">A<div class="abc-notes" id="A">A</div></button>
+          <button type="button" class="btn btn-outline-light">B♭<div class="abc-notes" id="B♭">_B</div></button>
+          <button type="button" class="btn btn-outline-light">B<div class="abc-notes" id="B">B</div></button>
 
-            <button type="button" class="btn btn-outline-light">C<div class="abc-notes" id="c">c</div></button>
-            <button type="button" class="btn btn-outline-light">C♯<div class="abc-notes" id="c♯">^c</div></button>
-            <button type="button" class="btn btn-outline-light">D<div class="abc-notes" id="d">d</div></button>
-            <button type="button" class="btn btn-outline-light">E♭<div class="abc-notes" id="e♭">_e</div></button>
-            <button type="button" class="btn btn-outline-light">E<div class="abc-notes" id="e">e</div></button>
-            <button type="button" class="btn btn-outline-light">F<div class="abc-notes" id="f">f</div></button>
-            <button type="button" class="btn btn-outline-light">F♯<div class="abc-notes" id="f♯">^f</div></button>
-            <button type="button" class="btn btn-outline-light">G<div class="abc-notes" id="g">g</div></button>
-            <button type="button" class="btn btn-outline-light">A♭<div class="abc-notes" id="a♭">_a</div></button>
-            <button type="button" class="btn btn-outline-light">A<div class="abc-notes" id="a">a</div></button>
-            <button type="button" class="btn btn-outline-light">B♭<div class="abc-notes" id="b♭">_b</div></button>
-            <button type="button" class="btn btn-outline-light">B<div class="abc-notes" id="b">b</div></button>            
+          <button type="button" class="btn btn-outline-light">C<div class="abc-notes" id="c">c</div></button>
+          <button type="button" class="btn btn-outline-light">C♯<div class="abc-notes" id="c♯">^c</div></button>
+          <button type="button" class="btn btn-outline-light">D<div class="abc-notes" id="d">d</div></button>
+          <button type="button" class="btn btn-outline-light">E♭<div class="abc-notes" id="e♭">_e</div></button>
+          <button type="button" class="btn btn-outline-light">E<div class="abc-notes" id="e">e</div></button>
+          <button type="button" class="btn btn-outline-light">F<div class="abc-notes" id="f">f</div></button>
+          <button type="button" class="btn btn-outline-light">F♯<div class="abc-notes" id="f♯">^f</div></button>
+          <button type="button" class="btn btn-outline-light">G<div class="abc-notes" id="g">g</div></button>
+          <button type="button" class="btn btn-outline-light">A♭<div class="abc-notes" id="a♭">_a</div></button>
+          <button type="button" class="btn btn-outline-light">A<div class="abc-notes" id="a">a</div></button>
+          <button type="button" class="btn btn-outline-light">B♭<div class="abc-notes" id="b♭">_b</div></button>
+          <button type="button" class="btn btn-outline-light">B<div class="abc-notes" id="b">b</div></button>            
 
-            <button type="button" class="btn btn-outline-light">C<div class="abc-notes" id="c'">c'</div></button>
-          </div>
+          <button type="button" class="btn btn-outline-light">C<div class="abc-notes" id="c'">c'</div></button>
         </div>
-
-        <label for="chord-types-group" class="form-label"><i class="bi bi-music-note-beamed"></i> Chord type</label>
-        <div class="btn-toolbar mb-3" role="toolbar2" aria-label="Toolbar with button groups">
-          <div id="chord-types-group" class="btn-group me-2" role="group2" aria-label="Chord types group">
-            <button type="button" class="btn btn-outline-light">Major</button>
-            <button type="button" class="btn btn-outline-light">Minor</button>
-            <button type="button" class="btn btn-outline-light">Diminished</button>
-          </div>
-        </div>
-
-        
-        <figure id="keyboard-1" class="piano-keyboard">
-          <!-- placeholder - content will be built dynamicly -->
-        </figure>
-
-        <script type = "text/javascript">  
-           function setup() {
-            abcNotesConvert()
-            buildKeyBoard(document.getElementById("keyboard-1"))
-          }
-        </script>
-        <script type = "text/javascript">  
-          window.onload = setup
-        </script>
-    
-
       </div>
 
-      <br />
-      <script>
-        function reset() {
-          elmts = document.getElementsByClassName("key-pad")
-          for (i in elmts) {
-            e = elmts[i]
-            e.innerHTML = "&nbsp;"
-            e.style = 'transparent';
-          }
-        }
-
-        function change_key_text_colour(key_spec) {
-          keys = key_spec.split(" ")
-          for (i in keys) {
-            key = keys[i]
-            console.trace(key)
-            console.trace("\n")
-            elm = document.getElementById(key);
-            color = "red"
-            // if (elm.classList.contains("key-sharp")) {
-            //   color = "yellow"
-            // }
-            elm.style.color = color
-            // ⬤
-          }
-        }
-      
-
-        function add_dots(key_spec) {
-          keys = key_spec.replace("#", "♯").replace("b", "♭").split(" ")
-          for (i in keys) {
-            key = keys[i]
-            parts = key.split(":")
-            key = parts[0]
-            if (parts.length > 1) {
-              text = parts[1]
-            } else {
-              text = key
-            }
-            if (text == "_") {
-              text = "&nbsp;"
-            }
-            console.trace("key", i, "==", key)
-            elm = document.getElementById(key + "-pad")
-            elm.innerHTML = text
-            elm.style.background = "red"
-            // add_dot(elm)
-          }
-        }
-
-        function move_dot(from_id, to_id) {
-          //  getBoundingClientRect() 
-          // elmt.style.left = ...
-        }
-      </script>
-        <button id="add-dots" onclick='add_dots(document.getElementById("keys-to-color").value)'>Add Dots</button>
+      <label for="chord-types-group" class="form-label"><i class="bi bi-music-note-beamed"></i> Chord type</label>
+      <div class="btn-toolbar mb-3" role="toolbar2" aria-label="Toolbar with button groups">
+        <div id="chord-types-group" class="btn-group me-2" role="group2" aria-label="Chord types group">
+          <button type="button" class="btn btn-outline-light">Major</button>
+          <button type="button" class="btn btn-outline-light">Minor</button>
+          <button type="button" class="btn btn-outline-light">Diminished</button>
+        </div>
+      </div>
+    
+      <section>
+        <figure id="keyboard-1" class="piano-keyboard", data-first-key="C3", data-last-key="C5">
+          Placeholder - piano keyboard will be built here dynamicly
+        </figure>
+        <br />
+        <button id="add-dots" onclick='add_dots(document.getElementById("keyboard-1"), document.getElementById("keys-to-color").value)'>Add Dots</button>
         <input id="keys-to-color" value="C3:I D3:ii E3:iii F3:IV G3:V A3:vi B3:vii° D4:ix F4:XI"></input>
         <button id="reset" onclick="reset()">Reset</button>
+      </section>
+
+      <section>
+        <figure id="keyboard-2" class="piano-keyboard", data-first-key="A0", data-last-key="C8">
+          Placeholder - piano keyboard will be built here dynamicly
+        </figure>
+        <br />
+        <button id="add-dots" onclick='add_dots(document.getElementById("keyboard-2"), document.getElementById("keys-to-color").value)'>Add Dots</button>
+        <input id="keys-to-color" value="C3:I D3:ii E3:iii F3:IV G3:V A3:vi B3:vii° D4:ix F4:XI"></input>
+        <button id="reset" onclick="reset()">Reset</button>
+      </section>
+
     </main>
   </body>
 </html>

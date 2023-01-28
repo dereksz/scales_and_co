@@ -1,5 +1,6 @@
 
 function abcNotes(src, tgt) {
+  /* Prepends some boiler-place and adds default small diemnsions */
   ABCJS.renderAbc(
     tgt,
     "X:1\nL:1/4\nK:none clef=none\n|" + src + "|",
@@ -15,23 +16,23 @@ function abcNotes(src, tgt) {
   )
 }
 
-function setViewBox(selector) {
-  var el = document.getElementById(selector);
-  var svgElement = el.firstChild
-  const {
-    x,
-    y,
-    width,
-    height,
-  } = svgElement.getBBox();
-  const viewBoxValue = [x+5, y, width, height].join(' ');
-  svgElement.setAttribute('viewBox', viewBoxValue);
-}
+// function setViewBox(selector) {
+//   var el = document.getElementById(selector);
+//   var svgElement = el.firstChild
+//   const {
+//     x,
+//     y,
+//     width,
+//     height,
+//   } = svgElement.getBBox();
+//   const viewBoxValue = [x+5, y, width, height].join(' ');
+//   svgElement.setAttribute('viewBox', viewBoxValue);
+// }
 
-function abcNotesConvert() {
-  document.querySelectorAll('.abc-notes').forEach(block=>{
+function initAbcNotes() {
+  for (block of document.getElementsByClassName('abc-notes')) {
     abcNotes(block.textContent, block.id)
-    // setViewBox(block.id)
-  })
+  }
 }
 
+window.addEventListener("load", initAbcNotes, true)
