@@ -12,7 +12,7 @@ body {
   background-color: var(--bs-gray-600);
 }
 
-#piano-keyboard {
+.piano-keyboard {
   position: relative;
   display: flex;
   text-align: center;
@@ -27,15 +27,64 @@ body {
   transition: background-color 0.25s;
 }
 
-/* #piano-keyboard > .key {
-  flex: 1;
-} */
+/* "Dervied" keys */
+
+.key-natural {
+  width: var(--natural-key-width);
+  height: var(--natural-key-height);
+  background: #fffff0; /* Ivory */
+  color: black;
+}
+
+.key-natural:hover {
+  background-color: rgb(89, 190, 89);
+}
+
+.key-sharp {
+  width: var(--sharp-key-width);
+  height: var(--sharp-key-height);
+  background: #36454f;
+  z-index: 1;
+  transform: translateX(-50%);
+}
+
+.key-sharp:hover {
+  background-color: green;
+}
+
+/* Specific sharp/flat keys */
+
+.key-C♯ {
+  transform: translateX(calc(-50% - var(--two-sharp-offsets)));
+}
+
+.key-E♭ {
+  transform: translateX(calc(-50% + var(--two-sharp-offsets)));
+}
+
+.key-F♯ {
+  transform: translateX(calc(-50% - var(--three-sharp-offsets)));
+}
+
+.key-B♭ {
+  transform: translateX(calc(-50% + var(--three-sharp-offsets)));
+}
+
+/* natural keys after sharps need to be adjusted to the left */
+
+.key-sharp + .key-natural { /* Shift left the white key over the black */
+  margin-left: calc(-1 * var(--sharp-key-width));
+}
+
+/* Contents of keys */
 
 .key-contents {
   position: absolute; /* Only way to position something at the "bottom" of it's container */
   width: 100%; /* Make sure we can centre-align the text properly */
   bottom: 5px;
 }
+
+/* A "pad" where a fingure can "land" */
 
 .key-pad {
   position: relative;
@@ -55,6 +104,11 @@ body {
   border-radius: 35%;
 }
 
+.key-text {
+  position: relative;
+  width: 100%;
+}
+
 /* .key:hover {
   content: "";
   width: 15px;
@@ -67,52 +121,6 @@ body {
   transform: translateX(-50%);
 } */
 
-.key-natural {
-  width: var(--natural-key-width);
-  height: var(--natural-key-height);
-  background: #fffff0; /* Ivory */
-  color: black;
-  /* padding-top: 145px; */
-}
-
-.key-sharp {
-  width: var(--sharp-key-width);
-  height: var(--sharp-key-height);
-  background: #36454f;
-  z-index: 1;
-  /* padding-top: 45px; */
-  transform: translateX(-50%);
-}
-
-.key-natural:hover {
-  background-color: rgb(89, 190, 89);
-}
-
-.key-sharp:hover {
-  background-color: green;
-}
-
-
-.key-C♯ {
-  transform: translateX(calc(-50% - var(--two-sharp-offsets)));
-}
-
-.key-E♭ {
-  transform: translateX(calc(-50% + var(--two-sharp-offsets)));
-}
-
-.key-F♯ {
-  transform: translateX(calc(-50% - var(--three-sharp-offsets)));
-}
-
-.key-B♭ {
-  transform: translateX(calc(-50% + var(--three-sharp-offsets)));
-}
-
-
-.key-sharp + .key-natural { /* Shift left the white key over the black */
-  margin-left: calc(-1 * var(--sharp-key-width));
-}
 
 /* .key.active::after {
   content: "";
