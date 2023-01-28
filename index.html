@@ -168,16 +168,19 @@
             } else {
               text = key
             }
+            if (text == "_") {
+              text = "&nbsp;"
+            }
             console.trace("key", i, "==", key)
             elm = document.getElementById(key + "-pad")
-            elm.innerText = text
+            elm.innerHTML = text
             elm.style.background = "red"
             // add_dot(elm)
           }
         }
       </script>
         <button id="add-dots" onclick='add_dots(document.getElementById("keys-to-color").value)'>Add Dots</button>
-        <input id="keys-to-color" value="C#3:I E3:iii G3:V"></input>
+        <input id="keys-to-color" value="C3:I D3:ii E3:iii F3:IV G3:V A3:vi B3:vii°"></input>
         <button id="reset" onclick="reset()">Reset</button>
     </main>
   </body>
