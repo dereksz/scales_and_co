@@ -1,8 +1,55 @@
-const KEYS = "C C♯ D E♭ E F F♯ G G♯ A B♭ B".split(" ")
+const NORMATIVE_KEYS_NAMES = "C C♯ D E♭ E F F♯ G G♯ A B♭ B".split(" ")
+
+// map
+const ACCIDENTALS_TO_OFFSETS = {
+  "𝄫": -2, // Double flat
+  "♭♭": -2, // Two flats
+  "bb": -2,
+  "♭": -1, // Flat
+  "b": -1,
+  "°": -1, // Diminished
+  "⁻": -1, // Superscript minus / minor
+  "-": -1, // Minus - simple
+  "": 0,
+  "♮": 0,
+  "⁺": 1, // Superscript plus / augmented
+  "+": 1,
+  "♯": 1, // Sharp
+  "#": 1,
+  "♯♯": 2, // Two sharps
+  "##": 2,
+  "𝄪": 2 // Double sharp
+}
 
 // Keys with an octave (`ko`s) are strings like "C3" or "F♯5"
 
 const DEFAULTS = ["C3", "C5"]
+
+const divmod = (x, y) => [Math.floor(x / y), x % y];
+
+function splitKo(ko) {
+  octave = parseInt(ko.slice(-1));
+  raw_key = ko.slice(0, -1);
+  offset = 0
+  for (var k = raw_key; k.length > 1; k = k.slice(0, -1)) {
+    accidental = k.slice(-1)
+    offset += ACCIDENTALS_TO_OFFSETS[accidental]
+  }
+  key_index = NORMATIVE_KEYS_NAMES.indexOf(k)
+  if (key_index == -1) {
+    throw new RangeError(`key=${k} is not a valid key`)
+  }
+  [octave_adjustment, key_index] = divmod(key_index + offset, 12)
+  octave += octave_adjustment
+
+  key = NORMATIVE_KEYS_NAMES[key_index]
+  return [key, octave]
+}
+
+function normaliseKo(ko) {
+  [key, octave] = splitKo(ko)
+  return key + octave
+}
 
 function getOctave(ko) {
   return parseInt(ko[ko.length - 1]);
@@ -15,16 +62,17 @@ function getKey(ko) {
 function* build_keys(from, to) {
   let octave = getOctave(from)
   let key = getKey(from)
-  let i = KEYS.indexOf(key)
+  let i = NORMATIVE_KEYS_NAMES.indexOf(key)
   if (i == -1) {
     throw new RangeError(`from=${from} is not a valid key`)
   }
   for(;octave <= 10;) {
-    key = KEYS[i] + octave
-    yield key
-    if (key == to) return
+    let key = NORMATIVE_KEYS_NAMES[i]
+    let full_key = key + octave
+    yield [full_key, key, octave]
+    if (full_key == to) return
     i += 1
-    if (i == KEYS.length) {
+    if (i == NORMATIVE_KEYS_NAMES.length) {
       i = 0
       octave += 1
     }
@@ -74,21 +122,21 @@ function buildKeyBoard(piano_ish) {
   let prev_shim = null
 
   try {
-    for (ko of build_keys(from, to)) {
-      let k = getKey(ko)
-      let id = piano.id + '-' + ko
+    let full_key, key, octave
+    for ([full_key, key, octave] of build_keys(from, to)) {
+      let id = piano.id + '-' + full_key
 
       let shim_elmt = null
 
       let key_elmt = document.createElement("div");
       key_elmt.id = id
       key_elmt.classList.add("key")
-      if (k.length == 1) {
+      if (key.length == 1) {
         key_elmt.classList.add("key-natural")
       } else {
         key_elmt.classList.add("key-sharp")
       }
-      key_elmt.classList.add("key-" + k)
+      key_elmt.classList.add("key-" + key)
 
       key_contents = document.createElement("div")
       key_contents.classList.add("key-contents")
@@ -103,14 +151,14 @@ function buildKeyBoard(piano_ish) {
       text = document.createElement("div");
       text.classList.add("key-text")
       text.id = id + "-text"
-      text.innerHTML = k + String.fromCodePoint(0x2080 + getOctave(ko)) // Subscript 0 through 9
+      text.innerHTML = key + String.fromCodePoint(0x2080 + octave) // Subscript 0 through 9
 
       // Build key_elmt
       key_contents.appendChild(pad)
       key_contents.appendChild(text)
       key_elmt.appendChild(key_contents)
 
-      if (k.length == 1) {
+      if (key.length == 1) {
         // Append white keys the the piano
         shim_elmt = document.createElement("div");
         shim_elmt.classList.add("keyboard-shim")
@@ -134,7 +182,7 @@ function initPianos() {
   for (piano of document.getElementsByClassName("piano-keyboard")) {
     buildKeyBoard(piano)
   }
-} 
+}
 
 
 // Once load is completed, build all keyboards
@@ -143,21 +191,20 @@ window.addEventListener("load", initPianos, true)
 
 // Manipulators
 
-function add_dots(piano_ish, key_spec) {
-  piano = piano_from_piano_ish(piano_ish)
-  for (key of key_spec.replace("#", "♯").replace("b", "♭").trim().split(/ +/)) {
-    parts = key.split(":")
-    key = parts[0]
-    if (parts.length > 1) {
-      text = parts[1]
-    } else {
-      text = key
-    }
-    if (text == "_") {
+function add_dots(piano_ish, key_specs) {
+  const piano = piano_from_piano_ish(piano_ish)
+  for (const key_spec of key_specs.trim().split(/ +/)) {
+    let ko, text
+    [ko, text] = key_spec.split(":")
+    if (text.length == 0) {
+      text = ko
+    } else if (text == "_") {
       text = "&nbsp;"
     }
+    ko = normaliseKo(ko)
     // console.trace("key", i, "==", key)
-    elm = document.getElementById(piano.id + '-' + key + "-pad")
+
+    const elm = document.getElementById(piano.id + '-' + ko + "-pad")
     elm.innerHTML = text
     elm.style.background = "red"
     // add_dot(elm)
