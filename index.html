@@ -69,9 +69,9 @@
           Placeholder - piano keyboard will be built here dynamicly
         </figure>
         <br />
-        <button id="add-dots" onclick='add_dots(document.getElementById("keyboard-1"), document.getElementById("keys-to-color").value)'>Add Dots</button>
+        <button id="add-dots" onclick='add_dots(this, this.nextElementSibling.value)'>Add Dots</button>
         <input id="keys-to-color" value="C3:I D3:ii E3:iii F3:IV G3:V A3:vi B3:vii° D4:ix F4:XI"></input>
-        <button id="reset" onclick="reset()">Reset</button>
+        <button id="reset" onclick="reset(this)">Reset</button>
       </section>
 
       <section>
@@ -79,9 +79,9 @@
           Placeholder - piano keyboard will be built here dynamicly
         </figure>
         <br />
-        <button id="add-dots" onclick='add_dots(document.getElementById("keyboard-2"), document.getElementById("keys-to-color").value)'>Add Dots</button>
+        <button id="add-dots" onclick='add_dots(this, this.nextElementSibling.value)'>Add Dots</button>
         <input id="keys-to-color" value="C3:I D3:ii E3:iii F3:IV G3:V A3:vi B3:vii° D4:ix F4:XI"></input>
-        <button id="reset" onclick="reset()">Reset</button>
+        <button id="reset" onclick="reset(this)">Reset</button>
       </section>
 
     </main>
