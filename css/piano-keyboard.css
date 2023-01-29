@@ -1,10 +1,11 @@
 :root {
   --natural-key-width: 48px;
   --natural-key-height: 220px;
-  --sharp-key-width: 30px;
-  --sharp-key-height: 120px;
-  --two-sharp-offsets: 2px;
-  --three-sharp-offsets: 4px;
+  --sharp-percent-width: 62.5%;
+  --sharp-inverted-percent-width: 160%; /* These two multiply to 1 */
+  --sharp-key-height: 54%;
+  --two-sharp-offsets: 4%;
+  --three-sharp-offsets: 6%;
 }
 
 body {
@@ -37,44 +38,47 @@ body {
   color: black;
 }
 
-.key-natural:hover {
+/* .key-natural:hover {
   background-color: rgb(89, 190, 89);
-}
+} */
 
 .key-sharp {
-  width: var(--sharp-key-width);
+  position: relative;
+  /* This one was too much - can't figure why: left: calc( var(--sharp-inverted-percent-width) / 2 + var(--sharp-percent-width) / 2 ); */
+  left: calc( var(--sharp-inverted-percent-width) / 4 + var(--sharp-percent-width) / 2 );
+  width: var(--sharp-percent-width);
   height: var(--sharp-key-height);
   background: #36454f;
+  color: white;
   z-index: 1;
-  transform: translateX(-50%);
 }
 
-.key-sharp:hover {
+/* .key-sharp:hover {
   background-color: green;
-}
+} */
 
 /* Specific sharp/flat keys */
 
 .key-C♯ {
-  transform: translateX(calc(-50% - var(--two-sharp-offsets)));
+  left: calc( var(--sharp-inverted-percent-width) / 4 + var(--sharp-percent-width) / 2 - var(--two-sharp-offsets));
 }
 
 .key-E♭ {
-  transform: translateX(calc(-50% + var(--two-sharp-offsets)));
+  left: calc( var(--sharp-inverted-percent-width) / 4 + var(--sharp-percent-width) / 2 + var(--two-sharp-offsets));
 }
 
 .key-F♯ {
-  transform: translateX(calc(-50% - var(--three-sharp-offsets)));
+  left: calc( var(--sharp-inverted-percent-width) / 4 + var(--sharp-percent-width) / 2 - var(--three-sharp-offsets));
 }
 
 .key-B♭ {
-  transform: translateX(calc(-50% + var(--three-sharp-offsets)));
+  left: calc( var(--sharp-inverted-percent-width) / 4 + var(--sharp-percent-width) / 2 + var(--three-sharp-offsets));
 }
 
 /* natural keys after sharps need to be adjusted to the left */
 
 .key-sharp + .key-natural { /* Shift left the white key over the black */
-  margin-left: calc(-1 * var(--sharp-key-width));
+  margin-left: calc(-1 * var(--sharp-percent-width));
 }
 
 /* Contents of keys */

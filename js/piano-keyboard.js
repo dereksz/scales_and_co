@@ -71,41 +71,53 @@ function buildKeyBoard(piano_ish) {
   let from = dataset?.firstKey || DEFAULTS[0]
   let to = dataset?.lastKey || DEFAULTS[1]
 
+  let prev_key = null
+
   try {
     for (ko of build_keys(from, to)) {
-      k = getKey(ko)
-      id = piano.id + '-' + ko
+      let k = getKey(ko)
+      let id = piano.id + '-' + ko
 
-      supr = document.createElement("div");
-      supr.id = id
-      supr.classList.add("key")
+      let key_elmt = document.createElement("div");
+      key_elmt.id = id
+      key_elmt.classList.add("key")
       if (k.length == 1) {
-        supr.classList.add("key-natural")
+        key_elmt.classList.add("key-natural")
       } else {
-        supr.classList.add("key-sharp")
+        key_elmt.classList.add("key-sharp")
       }
-      supr.classList.add("key-" + k)
+      key_elmt.classList.add("key-" + k)
 
       key_contents = document.createElement("div")
       key_contents.classList.add("key-contents")
 
+      // `pad` is a place to put a fingure or a marker
       pad = document.createElement("div");
       pad.classList.add("key-pad")
       pad.id = id + "-pad"
       pad.innerHTML = "&nbsp;"
 
+      // `text` comes under the pad, at the tip of the key
       text = document.createElement("div");
       text.classList.add("key-text")
       text.id = id + "-text"
-      text.appendChild(document.createTextNode(k)) // Main text
-      ov = document.createElement("sub");
-      ov.innerHTML = getOctave(ko)
-      text.appendChild(ov)
-      
+      text.innerHTML = `${k}<sub>${getOctave(ko)}</sub>`
+
+      // Build key_elmt
       key_contents.appendChild(pad)
       key_contents.appendChild(text)
-      supr.appendChild(key_contents)
-      piano.appendChild(supr)
+      key_elmt.appendChild(key_contents)
+
+      if (k.length == 1) {
+        // Append white keys the the piano
+        piano.appendChild(key_elmt)
+      } else {
+        // Append to white key (for abs positioning)
+        prev_key.appendChild(key_elmt)
+      }
+      
+      prev_key = key_elmt
+
     }
   } catch (e) {
     piano.innerHTML = `<div class="bar error">${e}</div>`
