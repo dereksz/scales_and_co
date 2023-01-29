@@ -103,7 +103,7 @@ function buildKeyBoard(piano_ish) {
       text = document.createElement("div");
       text.classList.add("key-text")
       text.id = id + "-text"
-      text.innerHTML = `${k}<sub>${getOctave(ko)}</sub>`
+      text.innerHTML = k + String.fromCodePoint(0x2080 + getOctave(ko)) // Subscript 0 through 9
 
       // Build key_elmt
       key_contents.appendChild(pad)
