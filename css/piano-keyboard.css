@@ -1,9 +1,9 @@
 :root {
-  --natural-key-width: 48px;
-  --natural-key-height: 220px;
+  --natural-key-width: 65px;
+  --natural-key-height: 280px;
   --sharp-percent-width: 62.5%;
   --sharp-inverted-percent-width: 160%; /* These two multiply to 1 */
-  --sharp-key-height: 54%;
+  --sharp-key-height: 60%;
   --two-sharp-offsets: 4%;
   --three-sharp-offsets: 6%;
 }
