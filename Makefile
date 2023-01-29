@@ -22,3 +22,5 @@ source-assets/LegniSaxophone.ttf:
 licenses/abcjs_plugin.LICENSE :
 	curl -O "$@" https://paulrosen.github.io/abcjs/dist/$(@F)
 
+open:
+	google-chrome index.html
