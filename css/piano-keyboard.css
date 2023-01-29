@@ -20,42 +20,41 @@ body {
   margin-top: 20px;
 }
 
+.keyboard-shim {
+  position: relative;
+  width: var(--natural-key-width);
+  height: var(--natural-key-height);
+}
+
+/* Common attributes for keys */
+
 .key {
   position: relative;
   border: 1px solid black;
   box-sizing: border-box;
   border-radius: 0 0 5px 5px;
-  display: block;
   transition: background-color 0.25s;
 }
 
-/* "Dervied" keys */
+/* The 2 main key types are qute different keys */
 
 .key-natural {
-  width: var(--natural-key-width);
-  height: var(--natural-key-height);
+  width: 100%;
+  height: 100%;
   background: #fffff0; /* Ivory */
   color: black;
 }
 
-/* .key-natural:hover {
-  background-color: rgb(89, 190, 89);
-} */
-
 .key-sharp {
-  position: relative;
   /* This one was too much - can't figure why: left: calc( var(--sharp-inverted-percent-width) / 2 + var(--sharp-percent-width) / 2 ); */
   left: calc( var(--sharp-inverted-percent-width) / 4 + var(--sharp-percent-width) / 2 );
+  top: -100%;
   width: var(--sharp-percent-width);
   height: var(--sharp-key-height);
   background: #36454f;
   color: white;
   z-index: 1;
 }
-
-/* .key-sharp:hover {
-  background-color: green;
-} */
 
 /* Specific sharp/flat keys */
 
@@ -81,6 +80,17 @@ body {
   margin-left: calc(-1 * var(--sharp-percent-width));
 }
 
+/* Hovers */
+
+.key-natural:hover {
+  background-color: rgb(89, 190, 89);
+}
+
+.key-sharp:hover {
+  background-color: green;
+}
+
+
 /* Contents of keys */
 
 .key-contents {
@@ -103,10 +113,11 @@ body {
   font-size: 18px;
 }
 
-.key-sharp > .key-pad {
-  width: 90%;
-  margin-left: 5%;
-  border-radius: 35%;
+/* Key-pad within sharpo needs to be bigger (in percentage terms) */
+.key-sharp .key-contents .key-pad {
+  width: 80%;
+  margin-left: 10%;
+  border-radius: 20%;
 }
 
 .key-text {
@@ -138,5 +149,3 @@ body {
   left: 50%;
   transform: translateX(-50%);
 } */
-
-

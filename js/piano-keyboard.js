@@ -71,12 +71,14 @@ function buildKeyBoard(piano_ish) {
   let from = dataset?.firstKey || DEFAULTS[0]
   let to = dataset?.lastKey || DEFAULTS[1]
 
-  let prev_key = null
+  let prev_shim = null
 
   try {
     for (ko of build_keys(from, to)) {
       let k = getKey(ko)
       let id = piano.id + '-' + ko
+
+      let shim_elmt = null
 
       let key_elmt = document.createElement("div");
       key_elmt.id = id
@@ -110,14 +112,16 @@ function buildKeyBoard(piano_ish) {
 
       if (k.length == 1) {
         // Append white keys the the piano
-        piano.appendChild(key_elmt)
+        shim_elmt = document.createElement("div");
+        shim_elmt.classList.add("keyboard-shim")
+        shim_elmt.appendChild(key_elmt)
+        piano.appendChild(shim_elmt)
+        prev_shim = shim_elmt
       } else {
         // Append to white key (for abs positioning)
-        prev_key.appendChild(key_elmt)
+        prev_shim.appendChild(key_elmt)
+        prev_shim = null
       }
-      
-      prev_key = key_elmt
-
     }
   } catch (e) {
     piano.innerHTML = `<div class="bar error">${e}</div>`
@@ -141,7 +145,7 @@ window.addEventListener("load", initPianos, true)
 
 function add_dots(piano_ish, key_spec) {
   piano = piano_from_piano_ish(piano_ish)
-  for (key of key_spec.replace("#", "♯").replace("b", "♭").split(" ")) {
+  for (key of key_spec.replace("#", "♯").replace("b", "♭").trim().split(/ +/)) {
     parts = key.split(":")
     key = parts[0]
     if (parts.length > 1) {
