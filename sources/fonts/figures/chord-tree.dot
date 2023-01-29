@@ -1,0 +1,12 @@
+digraph Chords {
+    rankdir=LR
+    X [label="X\ntonic"]
+    Xmaj [label="X\nMajor"]
+    Xmin [label="X-\nMinor"]
+    X -> Xmaj [label="+4 (III) +7 (V)"]
+    X -> Xmin [label="+3 (iii) +7 (V)"]
+    Xmaj7 [label="XΔ7\nMajor 7"]
+    Xmaj -> Xmaj7 [label="+ (VII)"]
+    Xmin7 [label="X-7\nMinor 7"]
+    Xmin -> Xmin7 [label="+ (VII)"]
+}
