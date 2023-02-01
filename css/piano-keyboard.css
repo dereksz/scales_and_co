@@ -106,9 +106,12 @@ body {
   position: relative;
   width: 60%;
   margin-left: 20%;
-  border-radius: 35%;
   color: white;
   background: transparent;
+}
+
+.key-pad, .finger {
+  border-radius: 35%;
   font-family: serif;
   font-weight: 400;
   font-size: 18px;
@@ -154,11 +157,8 @@ body {
 .finger {
   position: absolute;
   margin: 0;
-  height: var(--pad-width);
-  width: var(--pad-width);
-  border-radius: 35%;
   background-color: red;
   transition-property: left, top;
-  transition-duration: 1.5s;
+  transition-duration: 0.7s;
   z-index: 10;
 }

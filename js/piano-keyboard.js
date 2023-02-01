@@ -238,11 +238,12 @@ function change_key_text_colour(piano_ish, key_spec) {
 }
 
 function animate_fingers(piano_ish, key_specs) {
-  piano = piano_from_piano_ish(piano_ish)
+  const piano = piano_from_piano_ish(piano_ish)
 
   let final_positions = []
 
-  for (const key_pair of key_specs.trim().split(/ +/)) {
+  let timeout = 3
+  for (const key_pair of key_specs.trim().split(/ +/).reverse()) {
     let [from_and_text, to] = key_pair.split("~")
     let [from, text] = from_and_text.split(":")
     if (text == "_") {
@@ -257,26 +258,36 @@ function animate_fingers(piano_ish, key_specs) {
 
     const piano_pos = piano.getBoundingClientRect()
 
-    from_pos_left = from_pos.left - piano_pos.left
-    from_pos_top = from_pos.top - piano_pos.top
-    to_pos_left = to_pos.left - piano_pos.left
-    to_pos_top = to_pos.top - piano_pos.top
+    const from_pos_left = from_pos.left - piano_pos.left
+    const from_pos_top = from_pos.top - piano_pos.top
+    const to_pos_left = to_pos.left - piano_pos.left
+    const to_pos_top = to_pos.top - piano_pos.top
 
-    let finger = document.createElement("div")
+    const finger = document.createElement("div")
     finger.innerHTML = text
     finger.classList.add("finger")
     finger.style.left = from_pos_left + "px"
     finger.style.top = from_pos_top + "px"
     finger.style.width = from_pos.width + "px"
     finger.style.height = from_pos.height + "px"
+    finger.ontransitionend = () => {      
+      to_elmt.innerHTML = text
+      to_elmt.style.background = "red"
+      piano.removeChild(finger)
+    };    
     piano.appendChild(finger)
-    final_positions.push([finger, to_pos_left, to_pos_top])
-  }
 
-  setTimeout(() => {
-    for (let [finger, to_pos_left, to_pos_top] of final_positions) {
+    setTimeout(() => {    
       finger.style.left = to_pos_left + "px"
       finger.style.top = to_pos_top + "px"
-    }
-  }, 3)
+    }, timeout)
+    timeout += 200
+  }
+
+  // setTimeout(() => {
+  //   for (let [finger, to_pos_left, to_pos_top] of final_positions) {
+  //     finger.style.left = to_pos_left + "px"
+  //     finger.style.top = to_pos_top + "px"
+  //   }
+  // }, 3)
 }
