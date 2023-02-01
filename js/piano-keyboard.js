@@ -237,7 +237,7 @@ function change_key_text_colour(piano_ish, key_spec) {
   }
 }
 
-function animate_finger(piano_ish, key_specs) {
+function animate_fingers(piano_ish, key_specs) {
   piano = piano_from_piano_ish(piano_ish)
 
   let final_positions = []
