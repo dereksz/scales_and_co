@@ -6,6 +6,7 @@
   --sharp-key-height: 60%;
   --two-sharp-offsets: 4%;
   --three-sharp-offsets: 6%;
+  --pad-width: 39px;
 }
 
 body {
@@ -149,3 +150,15 @@ body {
   left: 50%;
   transform: translateX(-50%);
 } */
+
+.finger {
+  position: absolute;
+  margin: 0;
+  height: var(--pad-width);
+  width: var(--pad-width);
+  border-radius: 35%;
+  background-color: red;
+  transition-property: left, top;
+  transition-duration: 1.5s;
+  z-index: 10;
+}

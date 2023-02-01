@@ -191,6 +191,7 @@ window.addEventListener("load", initPianos, true)
 
 // Manipulators
 
+// Add text on "finger-pad" with red background
 function add_dots(piano_ish, key_specs) {
   const piano = piano_from_piano_ish(piano_ish)
   for (const key_spec of key_specs.trim().split(/ +/)) {
@@ -211,6 +212,7 @@ function add_dots(piano_ish, key_specs) {
   }
 }
 
+// Reset "finger-pad"s
 function reset(piano_ish) {
   piano = piano_from_piano_ish(piano_ish)
   for (let e of piano.getElementsByClassName("key-pad")) {
@@ -219,6 +221,7 @@ function reset(piano_ish) {
   }
 }
 
+// DEPRECATED
 function change_key_text_colour(piano_ish, key_spec) {
   piano = piano_from_piano_ish(piano_ish)
   for (let key_name of key_spec.split(" ")) {
@@ -232,4 +235,37 @@ function change_key_text_colour(piano_ish, key_spec) {
     key_elmt.style.color = color
     // ⬤
   }
+}
+
+function animate_finger(piano_ish, kay_pair) {
+  piano = piano_from_piano_ish(piano_ish)
+  let [from, to] = kay_pair.split("~")
+  from = normaliseKo(from)
+  to = normaliseKo(to)
+  let from_elmt = document.getElementById(piano.id + '-' + from + "-pad")
+  let to_elmt = document.getElementById(piano.id + '-' + to + "-pad")
+  let from_pos = from_elmt.getBoundingClientRect()
+  let to_pos = to_elmt.getBoundingClientRect()
+
+  const piano_pos = piano.getBoundingClientRect()
+  // from_pos = from_pos - piano_pos
+  // to_pos = to_pos - piano_pos
+
+  from_pos_left = from_pos.left - piano_pos.left
+  from_pos_top = from_pos.top - piano_pos.top
+  to_pos_left = to_pos.left - piano_pos.left
+  to_pos_top = to_pos.top - piano_pos.top
+
+  let finger = document.createElement("div")
+  finger.innerHTML = "Hi!"
+  finger.classList.add("finger")
+  finger.style.left = from_pos_left + "px"
+  finger.style.top = from_pos_top + "px"
+  finger.style.width = from_pos.width + "px"
+  finger.style.height = from_pos.height + "px"
+  piano.appendChild(finger)
+  setTimeout(() => {
+    finger.style.left = to_pos_left + "px"
+    finger.style.top = to_pos_top + "px"
+  }, 30)
 }
