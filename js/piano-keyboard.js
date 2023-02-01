@@ -237,35 +237,46 @@ function change_key_text_colour(piano_ish, key_spec) {
   }
 }
 
-function animate_finger(piano_ish, kay_pair) {
+function animate_finger(piano_ish, key_specs) {
   piano = piano_from_piano_ish(piano_ish)
-  let [from, to] = kay_pair.split("~")
-  from = normaliseKo(from)
-  to = normaliseKo(to)
-  let from_elmt = document.getElementById(piano.id + '-' + from + "-pad")
-  let to_elmt = document.getElementById(piano.id + '-' + to + "-pad")
-  let from_pos = from_elmt.getBoundingClientRect()
-  let to_pos = to_elmt.getBoundingClientRect()
 
-  const piano_pos = piano.getBoundingClientRect()
-  // from_pos = from_pos - piano_pos
-  // to_pos = to_pos - piano_pos
+  let final_positions = []
 
-  from_pos_left = from_pos.left - piano_pos.left
-  from_pos_top = from_pos.top - piano_pos.top
-  to_pos_left = to_pos.left - piano_pos.left
-  to_pos_top = to_pos.top - piano_pos.top
+  for (const key_pair of key_specs.trim().split(/ +/)) {
+    let [from_and_text, to] = key_pair.split("~")
+    let [from, text] = from_and_text.split(":")
+    if (text == "_") {
+      text = "&nbsp;"
+    }
+    from = normaliseKo(from)
+    to = normaliseKo(to)
+    const from_elmt = document.getElementById(piano.id + '-' + from + "-pad")
+    const to_elmt = document.getElementById(piano.id + '-' + to + "-pad")
+    const from_pos = from_elmt.getBoundingClientRect()
+    const to_pos = to_elmt.getBoundingClientRect()
 
-  let finger = document.createElement("div")
-  finger.innerHTML = "Hi!"
-  finger.classList.add("finger")
-  finger.style.left = from_pos_left + "px"
-  finger.style.top = from_pos_top + "px"
-  finger.style.width = from_pos.width + "px"
-  finger.style.height = from_pos.height + "px"
-  piano.appendChild(finger)
+    const piano_pos = piano.getBoundingClientRect()
+
+    from_pos_left = from_pos.left - piano_pos.left
+    from_pos_top = from_pos.top - piano_pos.top
+    to_pos_left = to_pos.left - piano_pos.left
+    to_pos_top = to_pos.top - piano_pos.top
+
+    let finger = document.createElement("div")
+    finger.innerHTML = text
+    finger.classList.add("finger")
+    finger.style.left = from_pos_left + "px"
+    finger.style.top = from_pos_top + "px"
+    finger.style.width = from_pos.width + "px"
+    finger.style.height = from_pos.height + "px"
+    piano.appendChild(finger)
+    final_positions.push([finger, to_pos_left, to_pos_top])
+  }
+
   setTimeout(() => {
-    finger.style.left = to_pos_left + "px"
-    finger.style.top = to_pos_top + "px"
-  }, 30)
+    for (let [finger, to_pos_left, to_pos_top] of final_positions) {
+      finger.style.left = to_pos_left + "px"
+      finger.style.top = to_pos_top + "px"
+    }
+  }, 3)
 }
