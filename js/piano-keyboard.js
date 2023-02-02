@@ -242,8 +242,13 @@ function animate_fingers(piano_ish, key_specs) {
 
   let final_positions = []
 
-  let timeout = 3
-  for (const key_pair of key_specs.trim().split(/ +/).reverse()) {
+  let timeout = 3 // Delay to starting the actual transition movement
+  let key_pairs = key_specs.trim().split(/ +/)
+  // We revesre the order of the keys so that the first key is the last to be moved
+  key_pairs = key_pairs.reverse()
+  // This works well since keys are normally written from left to right
+  // TODO: Thinking again, should probably be based on the relative direction of movement
+  for (const key_pair of key_pairs) {
     let [from_and_text, to] = key_pair.split("~")
     let [from, text] = from_and_text.split(":")
     if (text == "_") {
@@ -277,6 +282,7 @@ function animate_fingers(piano_ish, key_specs) {
     };    
     piano.appendChild(finger)
 
+    // New version - have them move individually
     setTimeout(() => {    
       finger.style.left = to_pos_left + "px"
       finger.style.top = to_pos_top + "px"
@@ -284,6 +290,7 @@ function animate_fingers(piano_ish, key_specs) {
     timeout += 200
   }
 
+  // this version was to have them all move at one
   // setTimeout(() => {
   //   for (let [finger, to_pos_left, to_pos_top] of final_positions) {
   //     finger.style.left = to_pos_left + "px"
